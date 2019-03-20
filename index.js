@@ -109,5 +109,5 @@ function splunkToolbox() {
   };
   
   var mySplunkServer = new splunkToolbox();
-  mySplunkServer.setSettings('martin');
+  mySplunkServer.setSettings();
   mySplunkServer.post_update_to_notable_event_group(); // Will output 'Hello, my name is Martin, I have ID: id_1'
