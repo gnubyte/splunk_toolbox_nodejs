@@ -1,44 +1,44 @@
-var request = require('request');
+var request = require("request");
 
 
 function splunkToolbox() {
-    console.log('Starting Splunk toolbox 1.0.2');
-    this.serverHost = '127.0.0.1';
-    this.authUsername = 'admin';
-    this.authPassword = 'changeme';
-    this.managementPort = '8089';
+    console.log("Starting Splunk toolbox 1.0.3");
+    this.serverHost = "127.0.0.1";
+    this.authUsername = "admin";
+    this.authPassword = "changeme";
+    this.managementPort = "8089";
     this.sslEnabled = true;
-    this.apiVersion = 'vLatest';
-    this.fullUrl = 'http://'
+    this.apiVersion = "vLatest";
+    this.fullUrl = "http://"
   }
 
-  this.set_base_url = function() {
+  splunkToolbox.prototype.set_base_url = function() {
       //Sets the Splunk base URL
-    if (self.sslEnabled == false){
+    if (this.sslEnabled == false){
         //if mngmt port is 80 unecrypted http
         this.fullUrl = "http://"+this.serverHost;
 
-        if (toString(this.managementPort) == '443'){
-            throw new Error('Cannot use port 443 with non https schema for a management port.');
+        if (toString(this.managementPort) == "443"){
+            throw new Error("Cannot use port 443 with non https schema for a management port.");
         }
-        else if (toString(this.managementPort) == '80'){
+        else if (toString(this.managementPort) == "80"){
             //pass
         }
         else {
-            this.fullUrl = this.fullUrl + ':'+(toString(this.managementPort));
+            this.fullUrl = this.fullUrl + ":"+(toString(this.managementPort));
         }//end else
     }
     else {
         // if ssl == true
-        this.fullUrl = 'https://'+this.serverHost;
-        if (toString(this.managementPort) == '443'){
+        this.fullUrl = "https://"+this.serverHost;
+        if (toString(this.managementPort) == "443"){
             //pass
         }
-        else if (toString(this.managementPort) == '80'){
-            throw new Error('Cannot use port 80, which is non https,  with https/ssl schema. ');
+        else if (toString(this.managementPort) == "80"){
+            throw new Error("Cannot use port 80, which is non https,  with https/ssl schema. ");
         }
         else {
-            this.fullUrl = this.fullUrl + ':' + toString(this.managementPort);
+            this.fullUrl = this.fullUrl + ":" + toString(this.managementPort);
         }//end else
 
     }//end if SSL == true
@@ -47,46 +47,47 @@ function splunkToolbox() {
 
 
   splunkToolbox.prototype.setSettings = function(paramServerHost, paramAuthUsername, paramAuthPassword, paramManagementPort, paramSslEnabled, paramApiVersion, paramFullUrl) {
-    if (paramServerHost !== null && paramServerHost !== ''){
+    if (paramServerHost !== null && paramServerHost !== ""){
         this.serverHost = toString(paramServerHost);
-        console.log('Set parameter server host');
+        console.log("Set parameter server host");
     }
-    if (paramAuthUsername !== null && paramAuthUsername !== ''){
+    if (paramAuthUsername !== null && paramAuthUsername !== ""){
         this.authUsername = toString(paramAuthUsername);
-        console.log('Set parameter Authentication username');
+        console.log("Set parameter Authentication username");
     }
-    if (paramAuthPassword !== null && paramAuthPassword !== ''){
+    if (paramAuthPassword !== null && paramAuthPassword !== ""){
         this.authPassword = toString(paramAuthPassword);
-        console.log('Set parameter Authentication password');
+        console.log("Set parameter Authentication password");
     }
-    if (paramManagementPort !== null && paramManagementPort !== ''){
+    if (paramManagementPort !== null && paramManagementPort !== ""){
         this.managementPort = toString(paramManagementPort);
-        console.log('set Parameter setting management port');
+        console.log("set Parameter setting management port");
     }
     
-    if (paramSslEnabled !== null && paramSslEnabled !== ''){
+    if (paramSslEnabled !== null && paramSslEnabled !== ""){
         this.sslEnabled = paramSslEnabled;
-        console.log('set Parameter SSL enabled');
+        console.log("set Parameter SSL enabled");
     }
-    if (paramApiVersion !== null && paramApiVersion !== ''){
+    if (paramApiVersion !== null && paramApiVersion !== ""){
         this.apiVersion = paramApiVersion;
-        console.log('set Parameter ApiVersion enabled');
+        console.log("set Parameter ApiVersion enabled");
     }
-    console.log('Setting base URL...');
+    console.log("Setting base URL...");
     this.set_base_url();
-    console.log('Base URL set...');
+    console.log("Base URL set...");
   };
 
 
   splunkToolbox.prototype.post_update_to_notable_event_group = function(itsi_group_id, json_body) {
-    console.log('Starting post update to notable event/episode group in Splunks ITSI');
+    console.log("Starting post update to notable event/episode group in Splunks ITSI");
     auth = "Basic " + new Buffer(this.authUsername + ":" + this.authPassword).toString("base64");
-    itsi_full_url = this.fullUrl + '/servicesNS/nobody/SA-ITOA/event_management_interface/notable_event_group/'+ toString(itsi_group_id) + '/?is_partial_data=1';
+    itsi_full_url = this.fullUrl + "/servicesNS/nobody/SA-ITOA/event_management_interface/notable_event_group/"+ itsi_group_id+ "/?is_partial_data=1";
+    console.log("URI: "+ itsi_full_url);
     request.post({
         url: itsi_full_url,
         headers: {
             "Authorization" : auth,
-            'content-type' : 'application/json'
+            "content-type" : "application/json"
         }, 
         form: json_body,
         json: true,
@@ -94,27 +95,27 @@ function splunkToolbox() {
             if (error){
                 console.log(error);
             } else {
-                console.log('No error');
+                console.log("No error");
             }
             if (response){
                 console.log(response);
             } else{
-                console.log('No response');
+                console.log("No response");
             }
             if (body){
                 console.log(body)
             } else {
-                console.log('There was no body in the response');
+                console.log("There was no body in the response");
             }
         }//end response handler function
 
     });
   };
   
-  var jsonbody = JSON.stringify({'status': '5'})
+  var jsonbody = JSON.stringify({"status": "5"})
 
   var mySplunkServer = new splunkToolbox();
 
-  mySplunkServer.setSettings(paramServerHost='127.0.0.1', paramAuthUsername='admin', paramAuthPassword='changeme', paramManagementPort='8089', paramSslEnabled=true, paramApiVersion='vLatest');
+  mySplunkServer.setSettings(paramServerHost="127.0.0.1", paramAuthUsername="admin", paramAuthPassword="changeme", paramManagementPort="8089", paramSslEnabled=true, paramApiVersion="vLatest");
 
-  mySplunkServer.post_update_to_notable_event_group(itsi_group_id='7e-au1327813-a87a', jsonbody=jsonbody ); 
+  mySplunkServer.post_update_to_notable_event_group(itsi_group_id="7e-au1327813-a87a", jsonbody=jsonbody ); 

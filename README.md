@@ -1,7 +1,7 @@
 # Splunk Toolbox - NodeJS edition
 _A toolbox for communicating with the Splunk Servers_
 
-## Version = 1.0.2
+## Version = 1.0.3
 
 
 
@@ -9,6 +9,7 @@ _A toolbox for communicating with the Splunk Servers_
  - 1.0.0 3/20/2019 3:03 PM EST - initial Proof of concept untested
  - 1.0.1 3/20/2019 3:06 PM EST - bug fix fixed typo in boolean from upper to lowercase
 -  1.0.2 3/20/2019 3:16 PM EST - bug fix, added call to set URL in the set settings as final call
+-  1.0.3 3/20/2019 3:16 PM EST - bug fix, fixed typo of self in base call and prototyped the setbaseurl function, changed string enclosures
 
 ## Example
 
