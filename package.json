@@ -1,0 +1,22 @@
+{
+  "name": "splunk-toolbox-nodejs",
+  "version": "1.0.0",
+  "description": "A Toolbox for interfacing with Splunk APIs and SDKs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "keywords": [
+    "splunk",
+    "rest"
+  ],
+  "author": "Patrick Hastings",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
