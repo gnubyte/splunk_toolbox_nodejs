@@ -1,9 +1,13 @@
 # Splunk Toolbox - NodeJS edition
 _A toolbox for communicating with the Splunk Servers_
 
-## Version = 1.0.0
+## Version = 1.0.1
 
 
+
+## Changelog
+ - 1.0.0 3/20/2019 3:03 PM EST - initial Proof of concept untested
+ - 1.0.1 3/20/2019 3:06 PM EST - fixed typo in boolean from upper to lowercase
 
 ## Example
 

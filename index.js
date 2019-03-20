@@ -112,6 +112,6 @@ function splunkToolbox() {
 
   var mySplunkServer = new splunkToolbox();
 
-  mySplunkServer.setSettings(paramServerHost='127.0.0.1', paramAuthUsername='admin', paramAuthPassword='changeme', paramManagementPort='8089', paramSslEnabled=True, paramApiVersion='vLatest');
+  mySplunkServer.setSettings(paramServerHost='127.0.0.1', paramAuthUsername='admin', paramAuthPassword='changeme', paramManagementPort='8089', paramSslEnabled=true, paramApiVersion='vLatest');
 
   mySplunkServer.post_update_to_notable_event_group(itsi_group_id='7e-au1327813-a87a', jsonbody=jsonbody ); 
