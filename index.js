@@ -2,7 +2,8 @@ var request = require('request');
 
 
 function splunkToolbox() {
-    this.serverHost = 'localhost';
+    console.log('Starting Splunk toolbox 1.0.2');
+    this.serverHost = '127.0.0.1';
     this.authUsername = 'admin';
     this.authPassword = 'changeme';
     this.managementPort = '8089';
@@ -71,14 +72,16 @@ function splunkToolbox() {
         this.apiVersion = paramApiVersion;
         console.log('set Parameter ApiVersion enabled');
     }
-
+    console.log('Setting base URL...');
+    this.set_base_url();
+    console.log('Base URL set...');
   };
 
 
   splunkToolbox.prototype.post_update_to_notable_event_group = function(itsi_group_id, json_body) {
     console.log('Starting post update to notable event/episode group in Splunks ITSI');
     auth = "Basic " + new Buffer(this.authUsername + ":" + this.authPassword).toString("base64");
-    itsi_full_url = this.fullUrl + 'servicesNS/nobody/SA-ITOA/event_management_interface/notable_event_group/'+ toString(itsi_group_id) + '/?is_partial_data=1';
+    itsi_full_url = this.fullUrl + '/servicesNS/nobody/SA-ITOA/event_management_interface/notable_event_group/'+ toString(itsi_group_id) + '/?is_partial_data=1';
     request.post({
         url: itsi_full_url,
         headers: {
