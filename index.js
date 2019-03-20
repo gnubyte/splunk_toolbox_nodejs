@@ -108,6 +108,10 @@ function splunkToolbox() {
     });
   };
   
+  var jsonbody = JSON.stringify({'status': '5'})
+
   var mySplunkServer = new splunkToolbox();
-  mySplunkServer.setSettings();
-  mySplunkServer.post_update_to_notable_event_group(); // Will output 'Hello, my name is Martin, I have ID: id_1'
+
+  mySplunkServer.setSettings(paramServerHost='127.0.0.1', paramAuthUsername='admin', paramAuthPassword='changeme', paramManagementPort='8089', paramSslEnabled=True, paramApiVersion='vLatest');
+
+  mySplunkServer.post_update_to_notable_event_group(itsi_group_id='7e-au1327813-a87a', jsonbody=jsonbody ); 
